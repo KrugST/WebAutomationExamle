@@ -83,9 +83,31 @@ public class FirstTest {
         assertTrue(result);
     }
 
-    @Test
-    public void qweqweqweqweqwe() {
+    //метод чтобы провериить если у фолдера есть кнопочка скачать
+    public boolean checkIfFolderHaveDownloadIcon(String folderName) {
+        // выбераю перент веб элемент li в котором находитсо 2 дива, все папки одинаковые
+        WebElement folderSectionInformation = driver.findElement(By.xpath("//div[@title='" + folderName + "']/parent::*"));
+        //ищю уже внутри li элимента если есть картинка для скачивания, иконка везде одинаковая так что ищю по ссылки на иконку
+        try {
+            folderSectionInformation.findElement(By.xpath(".//img[@src='/modules/common/images/download.png']"));
+            return true;
+        } catch (NoSuchElementException no) {
+            return false;
+        }
 
+    }
+
+    @Test
+    public void checkAudioBibleForDownloadIcon() {
+        // используем зарание созданый метод чтобы зайти на страницу
+        goToPage();
+        // используем зарание созданый метод чтобы нажать на ссылку в меню
+        clickMenuItem("Медиатека");
+        // используем зарание созданный метод чтобы проверить если папка аудиобиблии имеет иконку скачать
+        // метод вернёт true или false, засовываем результат в переменную
+        boolean result = checkIfFolderHaveDownloadIcon("Аудио Библия");
+        // ожидаем что наша переменная с результатом содержит true, если нет то всё плохо и мы видим ошибку
+        assertTrue(result);
     }
 
     // закрываем браузер после теста
