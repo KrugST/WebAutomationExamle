@@ -64,6 +64,11 @@ public class FirstTest {
         assertTrue(result);
     }
 
+    @Test
+    public void qweqweqweqweqwe(){
+
+    }
+
     @AfterTest
     public void closeBrowser() {
         driver.close();
