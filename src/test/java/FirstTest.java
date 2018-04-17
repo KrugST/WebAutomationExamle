@@ -19,6 +19,7 @@ public class FirstTest {
     // создаём верейбел драйвер внутри класса чтобы можно было использовать в любых метадах
     WebDriver driver;
 
+    // метод указывает путь к драйверу, открывает браузер и заходит на страницу
     public void goToPage() {
         // Путь к драйверу
         System.setProperty("webdriver.gecko.driver", "C:\\repos\\popovednik-automation\\drivers\\geckodriver.exe");
@@ -28,7 +29,7 @@ public class FirstTest {
         driver.get("https://propovednik.com/");
     }
 
-    // метод для поиска кнопки меню и нажатие на него, в него передаётсо текст со ссылки <a> и обрабатываетсо внутри
+    // метод для поиска кнопки меню и нажатие на него, в него передаётсо текст со ссылки <a>
     public void clickMenuItem(String menuItemName) {
         // Создаём переменную в которой находитсо веб элемент и запихиваем туда элемент с сайта
         WebElement menuItemElement = driver.findElement(By.linkText(menuItemName));
@@ -36,7 +37,7 @@ public class FirstTest {
         menuItemElement.click();
     }
 
-    // метод который проверяет и находит название папки на сайте и проверяет если он там точно есть
+    // метод который проверяет и находит название папки на сайте и проверяет если он там точно есть, в него передаётсо название папки и возврашяетсо true or false
     public boolean isFolderExist(String folderItemName) {
         // Штука которая может поймать ошибку если вдруг чегото непроизойдёт того что мы ожидаем
         try {
@@ -49,7 +50,7 @@ public class FirstTest {
         }
     }
 
-    //метод чтобы провериить если у фолдера есть кнопочка скачать
+    //метод чтобы провериить если у фолдера есть кнопочка скачать, в него передаётсо название папки и возвращяетсо true or false
     public boolean checkIfFolderHaveDownloadIcon(String folderName) {
         // выбераю перент веб элемент li в котором находитсо 2 дива, все папки одинаковые
         WebElement folderSectionInformation = driver.findElement(By.xpath("//div[@title='" + folderName + "']/parent::*"));
@@ -60,10 +61,9 @@ public class FirstTest {
         } catch (NoSuchElementException no) {
             return false;
         }
-
     }
 
-    //Still Working on
+    //Метод для нажатия папки на странице мидиотека, в него передаю название папки которую нужно нажать, и это название вставляю прямо в xpath
     public void clickFolderNameOnMediotekaPage(String folderNameToClick) {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement folderToClick = driver.findElement(By.xpath("//div[@title='" + folderNameToClick + "']/parent::*"));
@@ -71,6 +71,7 @@ public class FirstTest {
 
     }
 
+    // тесткейс для проверки меню, если оно соответствует реквайраментам
     @Test
     public void testone() throws InterruptedException {
         // используем зарание созданый метод чтобы зайти на страницу
@@ -87,8 +88,7 @@ public class FirstTest {
         for (WebElement menuItem : menuItemsList) {
             String itemText = menuItem.getText().trim();
             // вот тут добавляем в нашу новую созданную переменную текст из каждой кнопки меню
-            actualMenuItems.add(itemText);
-        }
+            actualMenuItems.add(itemText); }
         System.out.println(expectedMenuItems.toString());
         System.out.println(actualMenuItems.toString());
         //Ожидаем что наша переменная с реквайраментами = переменной в которой находятсо айтемы с нашего сайта, если они неравны то будет false
@@ -96,6 +96,7 @@ public class FirstTest {
 
     }
 
+    // тесткейс для проверки если папка с именем медиотека сушествует
     @Test
     public void isFolderPresent() {
         // используем зарание созданый метод чтобы зайти на страницу
@@ -108,6 +109,7 @@ public class FirstTest {
         assertTrue(result);
     }
 
+    //тест кейс для проверки если папка имеет довнлоад иконку
     @Test
     public void checkAudioBibleForDownloadIcon() {
         // используем зарание созданый метод чтобы зайти на страницу
@@ -136,13 +138,16 @@ public class FirstTest {
 
     //метод чтобы проверять бредкрамбс на сайте, тесткеейс чтобы проверить на страницы медиатека в папке благовести
     @Test
-    public void checkBreadcrumbIfItSaysPageFolder() {
+    public void checkBreadcrumbIfItSaysPageFolder() throws InterruptedException {
+        // где брать то реквайраменты?
         List<String> expectedBreadcrumList = Arrays.asList("Медиатека", "Благовестие");
         List<String> actualBreadcrumbsList = new ArrayList<String>();
         // используем зарание созданый метод чтобы зайти на страницу
         goToPage();
         // используем зарание созданый метод чтобы нажать на ссылку в меню
         clickMenuItem("Медиатека");
+        //в поезде медленный интернет, похоже кликает быстрее чем грузятсо папки, надо какнибудь зделать получше!!!!!!!!!!!
+        Thread.sleep(1000);
         // исользуем зарание созданный метод чтобы нажать зайти в папку на страницу медиотека, передаём туда текст в переменную
         clickFolderNameOnMediotekaPage("Благовестие");
         // находим бредкрамсы по уникальному лакейтору
@@ -156,6 +161,17 @@ public class FirstTest {
             actualBreadcrumbsList.add(itemText);
         }
         assertTrue(actualBreadcrumbsList.equals(expectedBreadcrumList));
+    }
+
+    // тест кейс для проверки названия хедара сайта, нечего особенного
+    @Test
+    public void checkWebsiteHeaderLogoName() {
+        String websiteExpectedName = "Propovednik.com";
+        String websiteActualName = new String();
+        // используем зарание созданый метод чтобы зайти на страницу
+        goToPage();
+        websiteActualName = driver.findElement(By.xpath("//div[@id='header-top']/div[@class='header-logo']/h1")).getText().trim();
+        assertTrue(websiteActualName.equals(websiteExpectedName));
     }
 
     // закрываем браузер после теста
