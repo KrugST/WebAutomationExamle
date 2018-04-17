@@ -62,11 +62,13 @@ public class FirstTest {
         }
 
     }
+
     //Still Working on
     public void clickFolderNameOnMediotekaPage(String folderNameToClick) {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         WebElement folderToClick = driver.findElement(By.xpath("//div[@title='" + folderNameToClick + "']/parent::*"));
         folderToClick.click();
+
     }
 
     @Test
@@ -118,9 +120,10 @@ public class FirstTest {
         // ожидаем что наша переменная с результатом содержит true, если нет то всё плохо и мы видим ошибку
         assertTrue(result);
     }
+
     //Проверяю если папка благовестие имеет иконку скачки
     @Test
-    public void checkIfBlagovestieDoesNotHaveDownloadIcon(){
+    public void checkIfBlagovestieDoesNotHaveDownloadIcon() {
         // используем зарание созданый метод чтобы зайти на страницу
         goToPage();
         // используем зарание созданый метод чтобы нажать на ссылку в меню
@@ -131,13 +134,28 @@ public class FirstTest {
         assertFalse(result);
     }
 
+    //метод чтобы проверять бредкрамбс на сайте, тесткеейс чтобы проверить на страницы медиатека в папке благовести
     @Test
     public void checkBreadcrumbIfItSaysPageFolder() {
+        List<String> expectedBreadcrumList = Arrays.asList("Медиатека", "Благовестие");
+        List<String> actualBreadcrumbsList = new ArrayList<String>();
         // используем зарание созданый метод чтобы зайти на страницу
         goToPage();
         // используем зарание созданый метод чтобы нажать на ссылку в меню
         clickMenuItem("Медиатека");
+        // исользуем зарание созданный метод чтобы нажать зайти в папку на страницу медиотека, передаём туда текст в переменную
         clickFolderNameOnMediotekaPage("Благовестие");
+        // находим бредкрамсы по уникальному лакейтору
+        WebElement breadcrumbsDiv = driver.findElement(By.xpath("//div[@class='breadcrumb-wrapper']//div[contains(@class, 'breadcrumb ')]"));
+        // вычлиняем каждый бредкрамб, они находятсо в А как ссылка
+        List<WebElement> breadcrumbsItemsList = breadcrumbsDiv.findElements(By.tagName("a"));
+        //достаём текст из веб элементов где находитсо этот бредкрамб
+        for (WebElement breadcrumbItem : breadcrumbsItemsList) {
+            String itemText = breadcrumbItem.getText().trim();
+            // вот тут добавляем в нашу новую созданную переменную текст из каждой А элементины
+            actualBreadcrumbsList.add(itemText);
+        }
+        assertTrue(actualBreadcrumbsList.equals(expectedBreadcrumList));
     }
 
     // закрываем браузер после теста
