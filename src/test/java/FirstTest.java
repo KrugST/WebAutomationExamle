@@ -3,14 +3,17 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertTrue;
+import static org.testng.AssertJUnit.assertFalse;
 
 public class FirstTest {
     // создаём верейбел драйвер внутри класса чтобы можно было использовать в любых метадах
@@ -44,6 +47,26 @@ public class FirstTest {
         } catch (NoSuchElementException ne) {
             return false;
         }
+    }
+
+    //метод чтобы провериить если у фолдера есть кнопочка скачать
+    public boolean checkIfFolderHaveDownloadIcon(String folderName) {
+        // выбераю перент веб элемент li в котором находитсо 2 дива, все папки одинаковые
+        WebElement folderSectionInformation = driver.findElement(By.xpath("//div[@title='" + folderName + "']/parent::*"));
+        //ищю уже внутри li элимента если есть картинка для скачивания, иконка везде одинаковая так что ищю по ссылки на иконку
+        try {
+            folderSectionInformation.findElement(By.xpath(".//img[@src='/modules/common/images/download.png']"));
+            return true;
+        } catch (NoSuchElementException no) {
+            return false;
+        }
+
+    }
+    //Still Working on
+    public void clickFolderNameOnMediotekaPage(String folderNameToClick) {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        WebElement folderToClick = driver.findElement(By.xpath("//div[@title='" + folderNameToClick + "']/parent::*"));
+        folderToClick.click();
     }
 
     @Test
@@ -83,20 +106,6 @@ public class FirstTest {
         assertTrue(result);
     }
 
-    //метод чтобы провериить если у фолдера есть кнопочка скачать
-    public boolean checkIfFolderHaveDownloadIcon(String folderName) {
-        // выбераю перент веб элемент li в котором находитсо 2 дива, все папки одинаковые
-        WebElement folderSectionInformation = driver.findElement(By.xpath("//div[@title='" + folderName + "']/parent::*"));
-        //ищю уже внутри li элимента если есть картинка для скачивания, иконка везде одинаковая так что ищю по ссылки на иконку
-        try {
-            folderSectionInformation.findElement(By.xpath(".//img[@src='/modules/common/images/download.png']"));
-            return true;
-        } catch (NoSuchElementException no) {
-            return false;
-        }
-
-    }
-
     @Test
     public void checkAudioBibleForDownloadIcon() {
         // используем зарание созданый метод чтобы зайти на страницу
@@ -108,6 +117,27 @@ public class FirstTest {
         boolean result = checkIfFolderHaveDownloadIcon("Аудио Библия");
         // ожидаем что наша переменная с результатом содержит true, если нет то всё плохо и мы видим ошибку
         assertTrue(result);
+    }
+    //Проверяю если папка благовестие имеет иконку скачки
+    @Test
+    public void checkIfBlagovestieDoesNotHaveDownloadIcon(){
+        // используем зарание созданый метод чтобы зайти на страницу
+        goToPage();
+        // используем зарание созданый метод чтобы нажать на ссылку в меню
+        clickMenuItem("Медиатека");
+        //используем рание созданный метод, но проверяем если иконки нету, !!!!!!!!!!
+        boolean result = checkIfFolderHaveDownloadIcon("Благовестие");
+        // ожидаем что наша переменная с результатом содержит false
+        assertFalse(result);
+    }
+
+    @Test
+    public void checkBreadcrumbIfItSaysPageFolder() {
+        // используем зарание созданый метод чтобы зайти на страницу
+        goToPage();
+        // используем зарание созданый метод чтобы нажать на ссылку в меню
+        clickMenuItem("Медиатека");
+        clickFolderNameOnMediotekaPage("Благовестие");
     }
 
     // закрываем браузер после теста
