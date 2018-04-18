@@ -29,6 +29,15 @@ public class FirstTest {
         driver.get("https://propovednik.com/");
     }
 
+    public void goToPageModified(String pageUrlToGo) {
+        // Путь к драйверу
+        System.setProperty("webdriver.gecko.driver", "C:\\repos\\popovednik-automation\\drivers\\geckodriver.exe");
+        // Использует драйвер фаирфокс
+        driver = new FirefoxDriver();
+        // Открывает браузер и заходит на страницу
+        driver.get("" + pageUrlToGo + "");
+    }
+
     // метод для поиска кнопки меню и нажатие на него, в него передаётсо текст со ссылки <a>
     public void clickMenuItem(String menuItemName) {
         // Создаём переменную в которой находитсо веб элемент и запихиваем туда элемент с сайта
@@ -88,7 +97,8 @@ public class FirstTest {
         for (WebElement menuItem : menuItemsList) {
             String itemText = menuItem.getText().trim();
             // вот тут добавляем в нашу новую созданную переменную текст из каждой кнопки меню
-            actualMenuItems.add(itemText); }
+            actualMenuItems.add(itemText);
+        }
         System.out.println(expectedMenuItems.toString());
         System.out.println(actualMenuItems.toString());
         //Ожидаем что наша переменная с реквайраментами = переменной в которой находятсо айтемы с нашего сайта, если они неравны то будет false
@@ -146,7 +156,7 @@ public class FirstTest {
         goToPage();
         // используем зарание созданый метод чтобы нажать на ссылку в меню
         clickMenuItem("Медиатека");
-        //в поезде медленный интернет, похоже кликает быстрее чем грузятсо папки, надо какнибудь зделать получше!!!!!!!!!!!
+        //в поезде медленный интернет, похоже кликает быстрее чем грузятсо папки, надо какнибудь зделать получше, имплисити вейт чтото тоже неработает, надо наверное чтобы джейквейри загрузилось!!!!!!!!!!!
         Thread.sleep(1000);
         // исользуем зарание созданный метод чтобы нажать зайти в папку на страницу медиотека, передаём туда текст в переменную
         clickFolderNameOnMediotekaPage("Благовестие");
@@ -172,6 +182,20 @@ public class FirstTest {
         goToPage();
         websiteActualName = driver.findElement(By.xpath("//div[@id='header-top']/div[@class='header-logo']/h1")).getText().trim();
         assertTrue(websiteActualName.equals(websiteExpectedName));
+    }
+
+    //тесткейс для проверки если на сайте сть кнопки play, previous track and next track
+    @Test
+    public void checkPlayerButtonsOnWebsite() throws InterruptedException {
+        goToPageModified("https://propovednik.com/");
+    //тут бы надо метод чтобы подождать пока загрузитсо джейквейри, спрошу в воскрисение, в гугле чтото большой какойто, мож потом зделаю
+        // а пока втыкну эту говняшку
+        Thread.sleep(1000);
+        // ну такое себе, надо проверяетсо одно за другим
+       driver.findElement(By.xpath("//div[@id='jp_container_1']//button[contains(@class, 'jp-play')]"));
+        driver.findElement(By.xpath("//div[@id='jp_container_1']//button[contains(@class, 'jp-next')]"));
+        driver.findElement(By.xpath("//div[@id='jp_container_1']//button[contains(@class, 'jp-previous')]"));
+        driver.findElement(By.xpath("//div[@id='jp_container_1']//button[contains(@class, 'playlist-clear-list')]"));
     }
 
     // закрываем браузер после теста
