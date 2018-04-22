@@ -12,6 +12,10 @@ public class AudioPleer {
         this.driver = driver;
     }
 
+    public void isPuaseButtonPresent(){
+
+    }
+
     public void isPlayButtonPresent(){
 
     }
@@ -25,6 +29,30 @@ public class AudioPleer {
     }
 
     public void clickNextTrackButton(){
+
+    }
+
+    public void isPreviousTrackButtonPresent(){
+
+    }
+
+    public void clickPreviousTrackButton(){
+
+    }
+
+    public void isMuteButtonShown(){
+
+    }
+
+    public void clickMuteButton(){
+
+    }
+
+    public void isUnmuteButtonShown(){
+
+    }
+
+    public void clickUnmuteButton(){
 
     }
 }
