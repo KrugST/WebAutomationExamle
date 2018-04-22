@@ -12,11 +12,6 @@ public class BaseTest {
         return driver;
     }
 
-    // метод указывает путь к драйверу, открывает браузер и заходит на страницу
-    public void goToHomePage(WebDriver driver) {
-        driver.get("https://propovednik.com/");
-    }
-
     @BeforeTest
     public void beforeTest(){
 
