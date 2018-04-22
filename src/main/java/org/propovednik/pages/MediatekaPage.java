@@ -4,12 +4,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.propovednik.base.DriverUtility;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MediatekaPage {
 
     WebDriver driver;
+    private By downloadIconLocator = By.xpath(".//img[@src='/modules/common/images/download.png']");
 
     public MediatekaPage(WebDriver driver){
         this.driver = driver;
@@ -17,28 +21,14 @@ public class MediatekaPage {
 
     // метод который проверяет и находит название папки на сайте и проверяет если он там точно есть, в него передаётсо название папки и возврашяетсо true or false
     public boolean isFolderExist(String folderItemName) {
-        // Штука которая может поймать ошибку если вдруг чегото непроизойдёт того что мы ожидаем
-        try {
-            // Ищим элемент по тексту ссылки <a> если он нашолся то возвращяем true
-            WebElement folderItemElement = driver.findElement(By.linkText(folderItemName));
-            return true;
-            //ожидаем если вдруг вылезет ошибка и ненайдётсо этого элемента то возвращяем false
-        } catch (NoSuchElementException ne) {
-            return false;
-        }
+       return DriverUtility.isElementPresent(driver, By.linkText(folderItemName));
     }
 
     //метод чтобы провериить если у фолдера есть кнопочка скачать, в него передаётсо название папки и возвращяетсо true or false
     public boolean checkIfFolderHaveDownloadIcon(String folderName) {
-        // выбераю перент веб элемент li в котором находитсо 2 дива, все папки одинаковые
         WebElement folderSectionInformation = driver.findElement(By.xpath("//div[@title='" + folderName + "']/parent::*"));
-        //ищю уже внутри li элимента если есть картинка для скачивания, иконка везде одинаковая так что ищю по ссылки на иконку
-        try {
-            folderSectionInformation.findElement(By.xpath(".//img[@src='/modules/common/images/download.png']"));
-            return true;
-        } catch (NoSuchElementException no) {
-            return false;
-        }
+        return DriverUtility.isElementPresentWithinAnotherElement(driver, folderSectionInformation,downloadIconLocator );
+
     }
 
     //Метод для нажатия папки на странице мидиотека, в него передаю название папки которую нужно нажать, и это название вставляю прямо в xpath
@@ -47,5 +37,19 @@ public class MediatekaPage {
         WebElement folderToClick = driver.findElement(By.xpath("//div[@title='" + folderNameToClick + "']/parent::*"));
         folderToClick.click();
     }
+
+    public List<String> getBreadcrumbs(){
+        WebElement breadcrumbsDiv = driver.findElement(By.xpath("//div[@class='breadcrumb-wrapper']//div[contains(@class, 'breadcrumb ')]"));
+        List<WebElement> breadcrumbsItemsList = breadcrumbsDiv.findElements(By.tagName("a"));
+        List<String> actualBreadcrumbsList = new ArrayList<String>();
+
+        for (WebElement breadcrumbItem : breadcrumbsItemsList) {
+            String itemText = breadcrumbItem.getText().trim();
+            // вот тут добавляем в нашу новую созданную переменную текст из каждой А элементины
+           actualBreadcrumbsList.add(itemText);
+        }
+        return actualBreadcrumbsList;
+    }
+
 
 }

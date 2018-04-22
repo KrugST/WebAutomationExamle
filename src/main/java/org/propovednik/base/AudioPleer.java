@@ -7,6 +7,8 @@ public class AudioPleer {
 
     WebDriver driver;
     private By playButton = By.xpath("//div[@id='jp_container_1']//button[contains(@class, 'jp-play')]");
+    private By nextButton = By.xpath("//div[@id='jp_container_1']//button[contains(@class, 'jp-next')]");
+    private By previousButton = By.xpath("//div[@id='jp_container_1']//button[contains(@class, 'playlist-clear-list')]");
 
     public AudioPleer(WebDriver driver){
         this.driver = driver;
@@ -16,7 +18,8 @@ public class AudioPleer {
 
     }
 
-    public void isPlayButtonPresent(){
+    public boolean isPlayButtonPresent(){
+        return DriverUtility.isElementPresent(driver,playButton);
 
     }
 
@@ -24,19 +27,23 @@ public class AudioPleer {
         driver.findElement(playButton).click();
     }
 
-    public void isNextTrackButtonPresent(){
+    public boolean isNextTrackButtonPresent(){
+        return DriverUtility.isElementPresent(driver,nextButton);
 
     }
 
     public void clickNextTrackButton(){
+        driver.findElement(nextButton).click();
 
     }
 
-    public void isPreviousTrackButtonPresent(){
+    public boolean isPreviousTrackButtonPresent(){
+        return DriverUtility.isElementPresent(driver, previousButton);
 
     }
 
     public void clickPreviousTrackButton(){
+        driver.findElement(previousButton).click();
 
     }
 
