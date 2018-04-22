@@ -1,22 +1,19 @@
 package org.propovednik.tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.propovednik.base.AudioPleer;
 import org.propovednik.base.BaseTest;
-import org.propovednik.base.DriverUtility;
 import org.propovednik.base.Menu;
 import org.propovednik.pages.HomePage;
 import org.propovednik.pages.MediatekaPage;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class FirstTest extends BaseTest {
 
@@ -25,7 +22,7 @@ public class FirstTest extends BaseTest {
 
     // тесткейс для проверки меню, если оно соответствует реквайраментам
     @Test
-    public void testone() throws InterruptedException {
+    public void testone() {
         // используем зарание созданый метод чтобы зайти на страницу
         WebDriver driver = getDriverInstance();
 
@@ -54,8 +51,8 @@ public class FirstTest extends BaseTest {
         menu.clickMenuItem("Медиатека");
 
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
-        //boolean result = mediatekaPage.isFolderExist("Благовестие");
-        assertTrue(mediatekaPage.isFolderExist("Благовестие"));
+        //boolean result = mediatekaPage.isFolderPresent("Благовестие");
+        assertTrue(mediatekaPage.isFolderPresent("Благовестие"));
 
         driver.close();
     }
@@ -72,7 +69,7 @@ public class FirstTest extends BaseTest {
         menu.clickMenuItem("Медиатека");
 
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
-        assertTrue(mediatekaPage.checkIfFolderHaveDownloadIcon("Аудио Библия"));
+        assertTrue(mediatekaPage.isDownloadIconPresentForFolder("Аудио Библия"));
 
         driver.close();
     }
@@ -88,7 +85,7 @@ public class FirstTest extends BaseTest {
         menu.clickMenuItem("Медиатека");
 
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
-        assertFalse(mediatekaPage.checkIfFolderHaveDownloadIcon("Благовестие"));
+        assertFalse(mediatekaPage.isDownloadIconPresentForFolder("Благовестие"));
 
         driver.close();
     }
@@ -107,10 +104,9 @@ public class FirstTest extends BaseTest {
         Thread.sleep(1000);
 
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
-        mediatekaPage.clickFolderNameOnMediotekaPage("Благовестие");
-
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        mediatekaPage.clickFolder("Благовестие");
         List<String> actualBreadcrumbsList = mediatekaPage.getBreadcrumbs();
-
         assertTrue(actualBreadcrumbsList.equals(expectedBreadcrumList));
 
         driver.close();
@@ -146,7 +142,6 @@ public class FirstTest extends BaseTest {
         Thread.sleep(1000);
         // ну такое себе, надо проверяетсо одно за другим
         AudioPleer audioPleer = new AudioPleer(driver);
-
         assertTrue(audioPleer.isPlayButtonPresent());
         assertTrue(audioPleer.isNextTrackButtonPresent());
         assertTrue(audioPleer.isPreviousTrackButtonPresent());

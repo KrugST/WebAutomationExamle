@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 public class DriverUtility {
 
     public static boolean isElementPresent(WebDriver driver, By locator){
-
         try {
             driver.findElement(locator);
             return true;
