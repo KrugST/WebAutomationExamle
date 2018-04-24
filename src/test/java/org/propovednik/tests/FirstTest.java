@@ -22,7 +22,7 @@ public class FirstTest extends BaseTest {
 
     // тесткейс для проверки меню, если оно соответствует реквайраментам
     @Test
-    public void testone() throws InterruptedException {
+    public void testone() {
         // используем зарание созданый метод чтобы зайти на страницу
         WebDriver driver = getDriverInstance();
 
