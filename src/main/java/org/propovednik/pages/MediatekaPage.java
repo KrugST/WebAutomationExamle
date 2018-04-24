@@ -51,5 +51,9 @@ public class MediatekaPage {
         return actualBreadcrumbsList;
     }
 
+    public void addAudioToPlayList() {
+
+    }
+
 
 }
