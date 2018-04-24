@@ -52,7 +52,7 @@ public class FirstTest extends BaseTest {
 
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
         //boolean result = mediatekaPage.isFolderExist("Благовестие");
-        assertTrue(mediatekaPage.isFolderExist("Благовестие"));
+        assertTrue(mediatekaPage.isFolderPresent("Благовестие"));
 
         driver.close();
     }
@@ -69,7 +69,7 @@ public class FirstTest extends BaseTest {
         menu.clickMenuItem("Медиатека");
 
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
-        assertTrue(mediatekaPage.checkIfFolderHaveDownloadIcon("Аудио Библия"));
+        assertTrue(mediatekaPage.isDownloadIconPresentForFolder("Аудио Библия"));
 
         driver.close();
     }
@@ -85,7 +85,7 @@ public class FirstTest extends BaseTest {
         menu.clickMenuItem("Медиатека");
 
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
-        assertFalse(mediatekaPage.checkIfFolderHaveDownloadIcon("Благовестие"));
+        assertFalse(mediatekaPage.isDownloadIconPresentForFolder("Благовестие"));
 
         driver.close();
     }
@@ -104,7 +104,7 @@ public class FirstTest extends BaseTest {
         Thread.sleep(1000);
 
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
-        mediatekaPage.clickFolderNameOnMediotekaPage("Благовестие");
+        mediatekaPage.clickFolder("Благовестие");
 
         List<String> actualBreadcrumbsList = mediatekaPage.getBreadcrumbs();
 
@@ -162,7 +162,7 @@ public void TestingPlayListMetods() throws InterruptedException {
 
     Thread.sleep(1000);
     MediatekaPage mediatekaPage = new MediatekaPage(driver);
-    mediatekaPage.clickFolderNameOnMediotekaPage("Благовестие");
+    mediatekaPage.clickFolder("Благовестие");
     Thread.sleep(1000);
     driver.findElement(By.xpath("(//img[@src='/modules/common/images/add_play_button_small.png'])[2]")).click();
     Thread.sleep(1000);
