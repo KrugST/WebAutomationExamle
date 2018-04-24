@@ -14,18 +14,18 @@ public class MediatekaPage {
     private By downloadIconLocator = By.xpath(".//img[@src='/modules/common/images/download.png']");
     private By breadcrumbs = By.xpath("//div[@class='breadcrumb-wrapper']//div[contains(@class, 'breadcrumb ')]");
 
-    public MediatekaPage(WebDriver driver){
+    public MediatekaPage(WebDriver driver) {
         this.driver = driver;
     }
 
     // метод который проверяет и находит название папки на сайте и проверяет если он там точно есть, в него передаётсо название папки и возврашяетсо true or false
     public boolean isFolderPresent(String folderItem) {
-       return DriverUtility.isElementPresent(driver, By.linkText(folderItem));
+        return DriverUtility.isElementPresent(driver, By.linkText(folderItem));
     }
 
     //метод чтобы провериить если у фолдера есть кнопочка скачать, в него передаётсо название папки и возвращяетсо true or false
     public boolean isDownloadIconPresentForFolder(String folderName) {
-        return DriverUtility.isElementPresentWithinAnotherElement(driver, getFolderElement(folderName), downloadIconLocator );
+        return DriverUtility.isElementPresentWithinAnotherElement(driver, getFolderElement(folderName), downloadIconLocator);
     }
 
     //Метод для нажатия папки на странице мидиотека, в него передаю название папки которую нужно нажать, и это название вставляю прямо в xpath
@@ -33,12 +33,12 @@ public class MediatekaPage {
         getFolderElement(folderName).click();
     }
 
-    private WebElement getFolderElement(String folderName){
+    private WebElement getFolderElement(String folderName) {
         WebElement folderElement = driver.findElement(By.xpath("//div[@title='" + folderName + "']/parent::*"));
         return folderElement;
     }
 
-    public List<String> getBreadcrumbs(){
+    public List<String> getBreadcrumbs() {
         WebElement breadcrumbsDiv = driver.findElement(breadcrumbs);
         List<WebElement> breadcrumbsItemsList = breadcrumbsDiv.findElements(By.tagName("a"));
         List<String> actualBreadcrumbsList = new ArrayList<String>();
@@ -46,7 +46,7 @@ public class MediatekaPage {
         for (WebElement breadcrumbItem : breadcrumbsItemsList) {
             String itemText = breadcrumbItem.getText().trim();
             // вот тут добавляем в нашу новую созданную переменную текст из каждой А элементины
-           actualBreadcrumbsList.add(itemText);
+            actualBreadcrumbsList.add(itemText);
         }
         return actualBreadcrumbsList;
     }

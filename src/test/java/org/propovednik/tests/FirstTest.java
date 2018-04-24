@@ -1,15 +1,12 @@
 package org.propovednik.tests;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.propovednik.base.*;
 import org.propovednik.pages.HomePage;
 import org.propovednik.pages.MediatekaPage;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -150,27 +147,28 @@ public class FirstTest extends BaseTest {
 
         driver.close();
     }
-@Test
-public void TestingPlayListMetods() throws InterruptedException {
-    WebDriver driver = getDriverInstance();
 
-    HomePage homePage = new HomePage(driver);
-    homePage.goToHomePage();
+    @Test
+    public void TestingPlayListMetods() throws InterruptedException {
+        WebDriver driver = getDriverInstance();
 
-    Menu menu = new Menu(driver);
-    menu.clickMenuItem("Медиатека");
+        HomePage homePage = new HomePage(driver);
+        homePage.goToHomePage();
 
-    Thread.sleep(1000);
-    MediatekaPage mediatekaPage = new MediatekaPage(driver);
-    mediatekaPage.clickFolder("Благовестие");
-    Thread.sleep(1000);
-    driver.findElement(By.xpath("(//img[@src='/modules/common/images/add_play_button_small.png'])[2]")).click();
-    Thread.sleep(1000);
+        Menu menu = new Menu(driver);
+        menu.clickMenuItem("Медиатека");
 
-    Playlist playlist = new Playlist(driver);
-    List<String> justTestingAzaza = playlist.getPlaylistItems();
-    System.out.println(justTestingAzaza);
-}
+        Thread.sleep(1000);
+        MediatekaPage mediatekaPage = new MediatekaPage(driver);
+        mediatekaPage.clickFolder("Благовестие");
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("(//img[@src='/modules/common/images/add_play_button_small.png'])[2]")).click();
+        Thread.sleep(1000);
+
+        Playlist playlist = new Playlist(driver);
+        List<String> justTestingAzaza = playlist.getPlaylistItems();
+        System.out.println(justTestingAzaza);
+    }
 
 
 }
