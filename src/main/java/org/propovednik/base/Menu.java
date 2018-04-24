@@ -38,6 +38,7 @@ public class Menu {
         }
         return actualMenuItems;
     }
+
     public String getWebsiteTitle(){
         String websiteActualName = driver.findElement(By.xpath("//div[@id='header-top']/div[@class='header-logo']/h1")).getText().trim();
         return websiteActualName;

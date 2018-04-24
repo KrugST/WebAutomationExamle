@@ -12,9 +12,4 @@ public class BaseTest {
         return driver;
     }
 
-    @BeforeTest
-    public void beforeTest(){
-
-    }
-
 }
