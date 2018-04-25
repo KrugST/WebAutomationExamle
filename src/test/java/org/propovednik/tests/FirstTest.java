@@ -166,6 +166,10 @@ public class FirstTest extends BaseTest {
         Thread.sleep(1000);
 
         Playlist playlist = new Playlist(driver);
+        Boolean testingIfListNotEmpty = playlist.isPlaylistEmpty();
+        System.out.println(testingIfListNotEmpty);
+        assertTrue(playlist.isPlaylistEmpty());
+
         List<String> justTestingAzaza = playlist.getPlaylistItems();
         System.out.println(justTestingAzaza);
     }

@@ -8,58 +8,65 @@ public class AudioPleer {
     WebDriver driver;
     private By playButton = By.xpath("//div[@id='jp_container_1']//button[contains(@class, 'jp-play')]");
     private By nextButton = By.xpath("//div[@id='jp_container_1']//button[contains(@class, 'jp-next')]");
-    private By previousButton = By.xpath("//div[@id='jp_container_1']//button[contains(@class, 'playlist-clear-list')]");
+    private By previousButton = By.xpath("//div[@id='jp_container_1']//button[contains(@class, 'jp-previous')]");
+    private By pauseButton = By.xpath("//div[@id='jp_container_1']//button[contains(@class, 'jp-pause')]");
+    private By muteSoundButtonLocator = By.xpath("//div[@id='jp_container_1']//button[contains(@class, 'jp-mute')]");
+    private By unmuteSoundButtonLocator = By.xpath("//div[@id='jp_container_1']//button[contains(@class, 'jp-unmute')]");
 
-    public AudioPleer(WebDriver driver){
+    public AudioPleer(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void isPuaseButtonPresent(){
+    public boolean isPauseButtonPresent() {
+        return DriverUtility.isElementPresent(driver, pauseButton);
+    }
+
+    public void clickPauseButton() {
+        driver.findElement(pauseButton).click();
+    }
+
+    public boolean isPlayButtonPresent() {
+        return DriverUtility.isElementPresent(driver, playButton);
 
     }
 
-    public boolean isPlayButtonPresent(){
-        return DriverUtility.isElementPresent(driver,playButton);
-
-    }
-
-    public void clickPlayButton(){
+    public void clickPlayButton() {
         driver.findElement(playButton).click();
     }
 
-    public boolean isNextTrackButtonPresent(){
-        return DriverUtility.isElementPresent(driver,nextButton);
+    public boolean isNextTrackButtonPresent() {
+        return DriverUtility.isElementPresent(driver, nextButton);
 
     }
 
-    public void clickNextTrackButton(){
+    public void clickNextTrackButton() {
         driver.findElement(nextButton).click();
 
     }
 
-    public boolean isPreviousTrackButtonPresent(){
+    public boolean isPreviousTrackButtonPresent() {
         return DriverUtility.isElementPresent(driver, previousButton);
 
     }
 
-    public void clickPreviousTrackButton(){
+    public void clickPreviousTrackButton() {
         driver.findElement(previousButton).click();
 
     }
 
-    public void isMuteButtonShown(){
-
+    public boolean isMuteButtonShown() {
+        return DriverUtility.isElementPresent(driver, muteSoundButtonLocator);
     }
 
-    public void clickMuteButton(){
-
+    public void clickMuteButton() {
+        driver.findElement(muteSoundButtonLocator).click();
     }
 
-    public void isUnmuteButtonShown(){
-
+    public boolean isUnmuteButtonShown() {
+        return DriverUtility.isElementPresent(driver, unmuteSoundButtonLocator);
     }
 
-    public void clickUnmuteButton(){
-
+    public void clickUnmuteButton() {
+        driver.findElement(unmuteSoundButtonLocator).click();
     }
 }
