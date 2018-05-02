@@ -149,7 +149,7 @@ public class FirstTest extends BaseTest {
     }
 
     @Test
-    public void TestingPlayListMetods() throws InterruptedException {
+    public void testingPlayListMetods() throws InterruptedException {
         WebDriver driver = getDriverInstance();
 
         HomePage homePage = new HomePage(driver);
@@ -172,6 +172,25 @@ public class FirstTest extends BaseTest {
 
         List<String> justTestingAzaza = playlist.getPlaylistItems();
         System.out.println(justTestingAzaza);
+    }
+
+    @Test
+    public void testingAddAudioToPlayListMethod() throws InterruptedException {
+        WebDriver driver = getDriverInstance();
+
+        HomePage homePage = new HomePage(driver);
+        homePage.goToHomePage();
+
+        Menu menu = new Menu(driver);
+        menu.clickMenuItem("Медиатека");
+
+        Thread.sleep(1000);
+        MediatekaPage mediatekaPage = new MediatekaPage(driver);
+        mediatekaPage.clickFolder("Благовестие");
+
+        Thread.sleep(1000);
+        mediatekaPage.addAudioAlbumToPlayList("1998 Общение по благовестию");
+
     }
 
 

@@ -51,7 +51,9 @@ public class MediatekaPage {
         return actualBreadcrumbsList;
     }
 
-    public void addAudioToPlayList() {
+    public void addAudioAlbumToPlayList(String audioListAlbumText) {
+        WebElement audioListAlbumItem = driver.findElement(By.xpath("//div[@title='" + audioListAlbumText + "']/parent::*"));
+        audioListAlbumItem.findElement(By.xpath("//img[@title='Add to Playlist']")).click();
 
     }
 
