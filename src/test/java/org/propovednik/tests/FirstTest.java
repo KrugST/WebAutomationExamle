@@ -3,6 +3,7 @@ package org.propovednik.tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.propovednik.base.*;
+import org.propovednik.pages.AdminLoginPage;
 import org.propovednik.pages.HomePage;
 import org.propovednik.pages.MediatekaPage;
 import org.testng.annotations.Test;
@@ -16,6 +17,7 @@ public class FirstTest extends BaseTest {
 
     List<String> expectedMenuItems = Arrays.asList("Медиатека", "Новости", "О нас", "Вещание", "Подписка", "Церкви и миссии");
     List<String> expectedBreadcrumList = Arrays.asList("Медиатека", "Благовестие");
+
 
     // тесткейс для проверки меню, если оно соответствует реквайраментам
     @Test
@@ -190,6 +192,16 @@ public class FirstTest extends BaseTest {
 
         Thread.sleep(1000);
         mediatekaPage.addAudioAlbumToPlayList("1998 Общение по благовестию");
+
+    }
+
+    @Test
+    public void testingAdminLoginPage() {
+        WebDriver driver = getDriverInstance();
+
+        AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
+        adminLoginPage.goToAdminLogin();
+        adminLoginPage.loginWithAdminAccount();
 
     }
 
