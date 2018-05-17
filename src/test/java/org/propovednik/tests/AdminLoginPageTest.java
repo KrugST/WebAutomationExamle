@@ -2,6 +2,7 @@ package org.propovednik.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.propovednik.admin.AdminLibrary;
 import org.propovednik.admin.AdminMenu;
 import org.propovednik.base.BaseTest;
 import org.propovednik.base.DriverUtility;
@@ -41,7 +42,7 @@ public class AdminLoginPageTest extends BaseTest {
     }
 
     @Test
-    public void testingNavigationOnAdminPanel() {
+    public void testingNavigationOnAdminPanel() throws InterruptedException {
         WebDriver driver = getDriverInstance();
 
         AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
@@ -51,5 +52,10 @@ public class AdminLoginPageTest extends BaseTest {
 
         AdminMenu adminMenu = new AdminMenu(driver);
         adminMenu.clickAdminMenuItem("Library");
+        Thread.sleep(1000);
+        AdminLibrary adminLibrary = new AdminLibrary(driver);
+        adminLibrary.clickAdminLibraryFolder("Для семейных");
+        Thread.sleep(1000);
+        adminLibrary.clickAdminLibraryFolder("2004 Семейное Кавказ");
     }
 }
