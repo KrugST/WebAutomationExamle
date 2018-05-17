@@ -3,7 +3,6 @@ package org.propovednik.tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.propovednik.base.*;
-import org.propovednik.pages.AdminLoginPage;
 import org.propovednik.pages.HomePage;
 import org.propovednik.pages.MediatekaPage;
 import org.testng.annotations.Test;
@@ -195,15 +194,7 @@ public class FirstTest extends BaseTest {
 
     }
 
-    @Test
-    public void testingAdminLoginPage() {
-        WebDriver driver = getDriverInstance();
 
-        AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
-        adminLoginPage.goToAdminLogin();
-        adminLoginPage.loginWithAdminAccount();
-
-    }
 
 
 }

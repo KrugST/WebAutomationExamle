@@ -1,4 +1,4 @@
-package org.propovednik.pages;
+package org.propovednik.admin;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -30,4 +30,6 @@ public class AdminLoginPage {
         driver.findElement(By.xpath("//div[@id='login-container-form']//input[@name='password']")).sendKeys(passwordToInput);
         driver.findElement(By.xpath("//div[@id='login-container-form']//input[@value='Log in']")).click();
     }
+
+
 }
