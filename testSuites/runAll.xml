@@ -1,3 +1,4 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TmpSuite" parallel="methods" thread-count="2">
     <test name="TmpTest" >
         <classes>
