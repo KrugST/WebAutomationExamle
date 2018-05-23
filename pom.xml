@@ -11,6 +11,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd_HH-mm</maven.build.timestamp.format>
+        <suite>testSuites/runAll.xml</suite>
+        <env></env>
+        <browser></browser>
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>
@@ -49,9 +53,19 @@
                     <threadCount>1</threadCount>
                     <forkMode>never</forkMode>
                     <reuseForks>false</reuseForks>
-                    <skipTests>false</skipTests>
                     <trimStackTrace>false</trimStackTrace>
                     <reportsDirectory>reports/${maven.build.timestamp}</reportsDirectory>
+
+                    <skipTests>${skipTests}</skipTests>
+                    <systemPropertyVariables>
+                        <env>${env}</env>
+                        <browser>${browser}</browser>
+                    </systemPropertyVariables>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suite}</suiteXmlFile>
+                    </suiteXmlFiles>
+
+
                     <argLine>-Xms512M</argLine>
                     <argLine>-Xmx1024M</argLine>
                 </configuration>
