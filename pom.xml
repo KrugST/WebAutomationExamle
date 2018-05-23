@@ -46,6 +46,8 @@
                     <skipTests>false</skipTests>
                     <trimStackTrace>false</trimStackTrace>
                     <reportsDirectory>reports/${maven.build.timestamp}</reportsDirectory>
+                    <argLine>-Xms512M</argLine>
+                    <argLine>-Xmx1024M</argLine>
                 </configuration>
             </plugin>
             <plugin>
