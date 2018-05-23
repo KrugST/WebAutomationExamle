@@ -47,9 +47,7 @@ public class FirstTest extends BaseTest {
 
         Menu menu = new Menu(driver);
         menu.clickMenuItem("Медиатека");
-        Thread.sleep(1000);
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
-        //boolean result = mediatekaPage.isFolderExist("Благовестие");
         assertTrue(mediatekaPage.isFolderPresent("Благовестие"));
 
         driver.close();
@@ -99,13 +97,10 @@ public class FirstTest extends BaseTest {
         Menu menu = new Menu(driver);
         menu.clickMenuItem("Медиатека");
 
-        Thread.sleep(1000);
-
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
         mediatekaPage.clickFolder("Благовестие");
 
         List<String> actualBreadcrumbsList = mediatekaPage.getBreadcrumbs();
-
         assertTrue(actualBreadcrumbsList.equals(expectedBreadcrumList));
 
         driver.close();

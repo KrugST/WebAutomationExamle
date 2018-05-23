@@ -3,6 +3,8 @@ package org.propovednik.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.propovednik.base.DriverUtility;
 
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ public class MediatekaPage {
     public MediatekaPage(WebDriver driver) {
         // TODO: maybe i can put waiter here to wait if whole page is loaded whole folder list
         this.driver = driver;
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@id='track-list']//img)[last()]"))); //Надо поменять на чтото получше
     }
 
     // метод который проверяет и находит название папки на сайте и проверяет если он там точно есть, в него передаётсо название папки и возврашяетсо true or false
