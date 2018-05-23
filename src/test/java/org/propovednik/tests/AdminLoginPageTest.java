@@ -25,6 +25,7 @@ public class AdminLoginPageTest extends BaseTest {
 
         adminLoginPage.loginWithProvidedCredentials(login, password);
         // TODO: asserttrue or false error text msg
+        driver.close();
     }
 
     @Test
@@ -43,6 +44,7 @@ public class AdminLoginPageTest extends BaseTest {
         adminLibrary.clickAdminLibraryFolder("Для семейных");
         Thread.sleep(1000);
         adminLibrary.clickAdminLibraryFolder("2004 Семейное Кавказ");
+        driver.close();
     }
 
 

@@ -38,7 +38,7 @@ public class FirstTest extends BaseTest {
 
     // тесткейс для проверки если папка с именем медиотека сушествует
     @Test
-    public void isFolderPresent() {
+    public void isFolderPresent() throws InterruptedException {
         // используем зарание созданый метод чтобы зайти на страницу
         WebDriver driver = getDriverInstance();
 
@@ -47,7 +47,7 @@ public class FirstTest extends BaseTest {
 
         Menu menu = new Menu(driver);
         menu.clickMenuItem("Медиатека");
-
+        Thread.sleep(1000);
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
         //boolean result = mediatekaPage.isFolderExist("Благовестие");
         assertTrue(mediatekaPage.isFolderPresent("Благовестие"));
@@ -173,6 +173,8 @@ public class FirstTest extends BaseTest {
 
         List<String> justTestingAzaza = playlist.getPlaylistItems();
         System.out.println(justTestingAzaza);
+
+        driver.close();
     }
 
     @Test
@@ -195,9 +197,11 @@ public class FirstTest extends BaseTest {
         Playlist playlist = new Playlist(driver);
         List<String> playListItemsTextActual = playlist.getPlaylistItems();
         //TODO: create veriable with expected playlist items, and compare it to actual, assert true equal
+
+        driver.close();
     }
 
 
-
-
+// TODO: browser should close after each test
+// TODO: logi, log4J
 }

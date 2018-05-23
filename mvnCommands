@@ -1,0 +1,3 @@
+mvn -Dtest=FirstTest#isFolderPresent test
+mvn -Dsuite=testSuites/runAll.xml test
+mvn -Dsuite=testSuites/runAll.xml -DskipTests=false test
