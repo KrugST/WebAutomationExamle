@@ -15,6 +15,7 @@ public class MediatekaPage {
     private By breadcrumbs = By.xpath("//div[@class='breadcrumb-wrapper']//div[contains(@class, 'breadcrumb ')]");
 
     public MediatekaPage(WebDriver driver) {
+        // TODO: maybe i can put waiter here to wait if whole page is loaded whole folder list
         this.driver = driver;
     }
 

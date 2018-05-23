@@ -12,21 +12,9 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertTrue;
 
 public class AdminLoginPageTest extends BaseTest {
-    private By adminLoginError = By.xpath("//div[@id='msgDiv']/div[contains(text(),'The username/email or password you entered is incorrect.')]");
-
 
     @Test
-    public void testingAdminLoginPage() {
-        WebDriver driver = getDriverInstance();
-
-        AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
-        adminLoginPage.goToAdminLogin();
-        adminLoginPage.loginWithAdminAccount();
-
-    }
-
-    @Test
-    public void testingAdminLoginPageWithRandomCredentials() {
+    public void testingLoginWithWrongCredentials() {
         String login = "abrakadaabra";
         String password = "azazashechka";
 
@@ -35,10 +23,8 @@ public class AdminLoginPageTest extends BaseTest {
         AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
         adminLoginPage.goToAdminLogin();
 
-        adminLoginPage.loginWithProvidedCredentials(login,password);
-
-        assertTrue(DriverUtility.isElementPresent(driver,adminLoginError));
-
+        adminLoginPage.loginWithProvidedCredentials(login, password);
+        // TODO: asserttrue or false error text msg
     }
 
     @Test
@@ -58,4 +44,6 @@ public class AdminLoginPageTest extends BaseTest {
         Thread.sleep(1000);
         adminLibrary.clickAdminLibraryFolder("2004 Семейное Кавказ");
     }
+
+
 }

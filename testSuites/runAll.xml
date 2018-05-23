@@ -1,0 +1,7 @@
+<suite name="TmpSuite" parallel="methods" thread-count="2">
+    <test name="TmpTest" >
+        <classes>
+        <class name="org.propovednik.tests.FirstTest"  />
+        </classes>
+    </test>
+</suite>

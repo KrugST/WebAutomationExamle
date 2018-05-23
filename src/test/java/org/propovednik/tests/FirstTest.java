@@ -176,7 +176,7 @@ public class FirstTest extends BaseTest {
     }
 
     @Test
-    public void testingAddAudioToPlayListMethod() throws InterruptedException {
+    public void testingAddAudioToPlayList() throws InterruptedException {
         WebDriver driver = getDriverInstance();
 
         HomePage homePage = new HomePage(driver);
@@ -185,13 +185,16 @@ public class FirstTest extends BaseTest {
         Menu menu = new Menu(driver);
         menu.clickMenuItem("Медиатека");
 
-        Thread.sleep(1000);
+        Thread.sleep(1000); // TODO: i need to write waiters
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
         mediatekaPage.clickFolder("Благовестие");
 
         Thread.sleep(1000);
         mediatekaPage.addAudioAlbumToPlayList("1998 Общение по благовестию");
 
+        Playlist playlist = new Playlist(driver);
+        List<String> playListItemsTextActual = playlist.getPlaylistItems();
+        //TODO: create veriable with expected playlist items, and compare it to actual, assert true equal
     }
 
 
