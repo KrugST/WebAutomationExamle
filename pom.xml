@@ -42,6 +42,7 @@
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>1</threadCount>
+                    <forkMode>never</forkMode>
                     <reuseForks>false</reuseForks>
                     <skipTests>false</skipTests>
                     <trimStackTrace>false</trimStackTrace>
