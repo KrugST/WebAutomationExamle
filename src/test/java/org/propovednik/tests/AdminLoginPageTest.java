@@ -24,7 +24,8 @@ public class AdminLoginPageTest extends BaseTest {
         adminLoginPage.goToAdminLogin();
 
         adminLoginPage.loginWithProvidedCredentials(login, password);
-        // TODO: asserttrue or false error text msg
+        // TODO: asserttrue or false error text msg, DONE
+        assertTrue(adminLoginPage.isLoginErrorPresent(login, password));
         driver.close();
     }
 

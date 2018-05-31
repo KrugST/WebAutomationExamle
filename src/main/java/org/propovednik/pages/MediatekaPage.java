@@ -17,7 +17,7 @@ public class MediatekaPage {
     private By breadcrumbs = By.xpath("//div[@class='breadcrumb-wrapper']//div[contains(@class, 'breadcrumb ')]");
 
     public MediatekaPage(WebDriver driver) {
-        // TODO: maybe i can put waiter here to wait if whole page is loaded whole folder list
+        // TODO: maybe i can put waiter here to wait if whole page is loaded whole folder list, DONE? or i need something better?
         this.driver = driver;
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@id='track-list']//img)[last()]"))); //Надо поменять на чтото получше
@@ -58,6 +58,7 @@ public class MediatekaPage {
 
     public void addAudioAlbumToPlayList(String audioListAlbumText) {
         WebElement audioListAlbumItem = driver.findElement(By.xpath("//div[@title='" + audioListAlbumText + "']/parent::*"));
+        // TODO:  conflict with xpath, not looking inside element, it looks inside whole page
         audioListAlbumItem.findElement(By.xpath("//img[@title='Add to Playlist']")).click();
 
     }

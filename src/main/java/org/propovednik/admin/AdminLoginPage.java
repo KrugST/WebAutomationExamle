@@ -2,6 +2,7 @@ package org.propovednik.admin;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.propovednik.base.DriverUtility;
 
 public class AdminLoginPage {
     WebDriver driver;
@@ -21,7 +22,7 @@ public class AdminLoginPage {
     }
 
     public void loginWithAdminAccount() {
-        // TODO: refactor locators and similar lines
+        // TODO: refactor locators and similar lines, DONE
         goToAdminLogin();
         driver.findElement(usernameFieldLocator).sendKeys(login);
         driver.findElement(passwordFieldLocator).sendKeys(password);
@@ -30,18 +31,27 @@ public class AdminLoginPage {
     }
 
     public void loginWithProvidedCredentials(String loginToInput, String passwordToInput) {
-        // TODO: refactor locators and similar lines
+        // TODO: refactor locators and similar lines, DONE
         goToAdminLogin();
         driver.findElement(usernameFieldLocator).sendKeys(loginToInput);
         driver.findElement(passwordFieldLocator).sendKeys(passwordToInput);
         driver.findElement(loginButtonLocator).click();
     }
 
-    public void isLoginErrorPresent() {
-
+    public boolean isLoginErrorPresent(String loginToInput, String passwordToInput) {
+        goToAdminLogin();
+        driver.findElement(usernameFieldLocator).sendKeys(loginToInput);
+        driver.findElement(passwordFieldLocator).sendKeys(passwordToInput);
+        driver.findElement(loginButtonLocator).click();
+        return DriverUtility.isElementPresent(driver, adminLoginError);
     }
 
-    public void getErrorMsgText() {
+    public String getErrorMsgText(String loginToInput, String passwordToInput) {
+        goToAdminLogin();
+        driver.findElement(usernameFieldLocator).sendKeys(loginToInput);
+        driver.findElement(passwordFieldLocator).sendKeys(passwordToInput);
+        driver.findElement(loginButtonLocator).click();
+        return driver.findElement(adminLoginError).getText(); //find  element and return;
 
     }
 }

@@ -174,6 +174,7 @@ public class FirstTest extends BaseTest {
 
     @Test
     public void testingAddAudioToPlayList() throws InterruptedException {
+        List<String> playListItemsTextExpected = Arrays.asList("1 Байкит, Варнавара 06-1997 - В.Фот - Дневник миссионера", "2 Байкит, Варнавара 06-1997 - В.Фот - Дневник миссионера","3 Дальний Восток, Сахалин - В.Фот - Дневник миссионера");
         WebDriver driver = getDriverInstance();
 
         HomePage homePage = new HomePage(driver);
@@ -186,13 +187,15 @@ public class FirstTest extends BaseTest {
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
         mediatekaPage.clickFolder("Благовестие");
 
-        Thread.sleep(1000);
-        mediatekaPage.addAudioAlbumToPlayList("1998 Общение по благовестию");
-
+        Thread.sleep(3000);
+        mediatekaPage.addAudioAlbumToPlayList("2002 Курганинск");
+        Thread.sleep(3000); //TODO: ahhh nope i need better waiter =(
         Playlist playlist = new Playlist(driver);
         List<String> playListItemsTextActual = playlist.getPlaylistItems();
-        //TODO: create veriable with expected playlist items, and compare it to actual, assert true equal
-
+        //TODO: create veriable with expected playlist items, and compare it to actual, assert true equal, DONE
+        System.out.println(playListItemsTextActual);
+        System.out.println(playListItemsTextExpected);
+        assertTrue(playListItemsTextActual.equals(playListItemsTextExpected));
         driver.close();
     }
 
