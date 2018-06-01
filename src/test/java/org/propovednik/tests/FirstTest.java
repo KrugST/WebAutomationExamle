@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.propovednik.base.*;
 import org.propovednik.pages.HomePage;
 import org.propovednik.pages.MediatekaPage;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -174,7 +175,7 @@ public class FirstTest extends BaseTest {
 
     @Test
     public void testingAddAudioToPlayList() throws InterruptedException {
-        List<String> playListItemsTextExpected = Arrays.asList("1 Байкит, Варнавара 06-1997 - В.Фот - Дневник миссионера", "2 Байкит, Варнавара 06-1997 - В.Фот - Дневник миссионера","3 Дальний Восток, Сахалин - В.Фот - Дневник миссионера");
+        List<String> playListItemsTextExpected = Arrays.asList("qwe1 Байкит, Варнавара 06-1997 - В.Фот - Дневник миссионера", "2 Байкит, Варнавара 06-1997 - В.Фот - Дневник миссионера","3 Дальний Восток, Сахалин - В.Фот - Дневник миссионера");
         WebDriver driver = getDriverInstance();
 
         HomePage homePage = new HomePage(driver);
@@ -196,9 +197,17 @@ public class FirstTest extends BaseTest {
         System.out.println(playListItemsTextActual);
         System.out.println(playListItemsTextExpected);
         assertTrue(playListItemsTextActual.equals(playListItemsTextExpected));
-        driver.close();
+
     }
 
+    @AfterTest
+    public void clozeShit() {
+        //not working
+        WebDriver driver = getDriverInstance();
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
 // TODO: browser should close after each test
 // TODO: logi, log4J

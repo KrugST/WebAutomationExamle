@@ -1,5 +1,7 @@
 package org.propovednik.admin.tests;
 
+import org.openqa.selenium.WebDriver;
+import org.propovednik.admin.AdminLoginPage;
 import org.propovednik.base.BaseTest;
 import org.testng.annotations.Test;
 
@@ -7,9 +9,17 @@ public class ManageMusicPageTests extends BaseTest {
 
     @Test
     public void testWorkingWithFiles(){
+        WebDriver driver = getDriverInstance();
+
         // Navigate to http://dev.propovednik.com/admin
+        AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
+        adminLoginPage.goToAdminLogin();
+
         // Login
+        adminLoginPage.loginWithAdminAccount();
+
         // Navigate to Manage Music Tracks page
+
         // Create new folder
         // Verify breadcrumbs says Медиатека » YourFolderName
         // Add multiple (lets to 3 files) mp3 files to upload queue
@@ -34,8 +44,15 @@ public class ManageMusicPageTests extends BaseTest {
 
     @Test
     public void updateTags(){
+        WebDriver driver = getDriverInstance();
+
         // Navigate to http://dev.propovednik.com/admin
+        AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
+        adminLoginPage.goToAdminLogin();
+
         // Login
+        adminLoginPage.loginWithAdminAccount();
+
         // Navigate to Manage Music Tracks page
         // Create new folder
         // Verify breadcrumbs says Медиатека » YourFolderName
