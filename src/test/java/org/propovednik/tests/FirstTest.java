@@ -176,7 +176,6 @@ public class FirstTest extends BaseTest {
     @Test
     public void testingAddAudioToPlayList() throws InterruptedException {
         List<String> playListItemsTextExpected = Arrays.asList("qwe1 Байкит, Варнавара 06-1997 - В.Фот - Дневник миссионера", "2 Байкит, Варнавара 06-1997 - В.Фот - Дневник миссионера","3 Дальний Восток, Сахалин - В.Фот - Дневник миссионера");
-        WebDriver driver = getDriverInstance();
 
         HomePage homePage = new HomePage(driver);
         homePage.goToHomePage();
@@ -200,14 +199,6 @@ public class FirstTest extends BaseTest {
 
     }
 
-    @AfterTest
-    public void clozeShit() {
-        //not working
-        WebDriver driver = getDriverInstance();
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 
 // TODO: browser should close after each test
 // TODO: logi, log4J

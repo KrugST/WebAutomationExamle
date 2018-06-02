@@ -13,4 +13,11 @@ public class AdminLibrary {
         driver.findElement(By.xpath("//div[@id='angularTools']//a[text()='" + folderNameText + "']")).click();
     }
 
+    public void createNewFolder(String newFolderNameToInput) throws InterruptedException {
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@id='newFolderForm']/button")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//input[@id='newFolderName']")).sendKeys(newFolderNameToInput);
+    }
+
 }

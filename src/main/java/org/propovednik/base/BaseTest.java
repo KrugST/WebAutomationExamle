@@ -3,8 +3,13 @@ package org.propovednik.base;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 
 public class BaseTest {
+
+    public WebDriver driver = null;
+
     String browser = "Chrome";
     // TODO: get system variable from MVN command
     // TODO: it should work on linux
@@ -23,6 +28,18 @@ public class BaseTest {
         }
         return driver;
 
+    }
+
+    @BeforeTest
+    public void beforeTest(){
+        driver = getDriverInstance();
+    }
+
+    @AfterTest
+    public void afterTest(){
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
 }

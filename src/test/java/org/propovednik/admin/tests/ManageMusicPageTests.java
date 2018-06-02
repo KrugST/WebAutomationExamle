@@ -1,14 +1,16 @@
 package org.propovednik.admin.tests;
 
 import org.openqa.selenium.WebDriver;
+import org.propovednik.admin.AdminLibrary;
 import org.propovednik.admin.AdminLoginPage;
+import org.propovednik.admin.AdminMenu;
 import org.propovednik.base.BaseTest;
 import org.testng.annotations.Test;
 
 public class ManageMusicPageTests extends BaseTest {
 
     @Test
-    public void testWorkingWithFiles(){
+    public void testWorkingWithFiles() throws InterruptedException {
         WebDriver driver = getDriverInstance();
 
         // Navigate to http://dev.propovednik.com/admin
@@ -19,6 +21,11 @@ public class ManageMusicPageTests extends BaseTest {
         adminLoginPage.loginWithAdminAccount();
 
         // Navigate to Manage Music Tracks page
+        AdminMenu adminMenu = new AdminMenu(driver);
+        adminMenu.clickAdminMenuItem("Library");
+
+        AdminLibrary adminLibrary = new AdminLibrary(driver);
+        adminLibrary.createNewFolder("test folder1");
 
         // Create new folder
         // Verify breadcrumbs says Медиатека » YourFolderName
