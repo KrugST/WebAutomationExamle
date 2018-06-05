@@ -175,31 +175,37 @@ public class FirstTest extends BaseTest {
 
     @Test
     public void testingAddAudioToPlayList() throws InterruptedException {
-        List<String> playListItemsTextExpected = Arrays.asList("qwe1 Байкит, Варнавара 06-1997 - В.Фот - Дневник миссионера", "2 Байкит, Варнавара 06-1997 - В.Фот - Дневник миссионера","3 Дальний Восток, Сахалин - В.Фот - Дневник миссионера");
-
+        List<String> playListItemsTextExpected = Arrays.asList("1 Байкит, Варнавара 06-1997 - В.Фот - Дневник миссионера", "2 Байкит, Варнавара 06-1997 - В.Фот - Дневник миссионера","3 Дальний Восток, Сахалин - В.Фот - Дневник миссионера");
+       // JSWaiter jsWaiter = new JSWaiter(driver);
+       // jsWaiter.waitForJQueryLoad();
         HomePage homePage = new HomePage(driver);
         homePage.goToHomePage();
+
+      //  jsWaiter.waitForJQueryLoad();
 
         Menu menu = new Menu(driver);
         menu.clickMenuItem("Медиатека");
 
-        //Thread.sleep(1000); // TODO: i need to write waiters
+       // jsWaiter.waitForJQueryLoad();
+
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
         mediatekaPage.clickFolder("Благовестие");
 
-       // Thread.sleep(3000);
+      //  jsWaiter.waitForJQueryLoad();
+
         mediatekaPage.addAudioAlbumToPlayList("2002 Курганинск");
-       // Thread.sleep(3000); //TODO: ahhh nope i need better waiter =(
         Playlist playlist = new Playlist(driver);
+
+     //   jsWaiter.waitForJQueryLoad();
+
         List<String> playListItemsTextActual = playlist.getPlaylistItems();
-        //TODO: create veriable with expected playlist items, and compare it to actual, assert true equal, DONE
+
         System.out.println(playListItemsTextActual);
         System.out.println(playListItemsTextExpected);
+
         assertTrue(playListItemsTextActual.equals(playListItemsTextExpected));
 
     }
 
-
-// TODO: browser should close after each test
 // TODO: logi, log4J
 }

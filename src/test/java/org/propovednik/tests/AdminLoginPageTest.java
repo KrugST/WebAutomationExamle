@@ -18,21 +18,16 @@ public class AdminLoginPageTest extends BaseTest {
         String login = "abrakadaabra";
         String password = "azazashechka";
 
-        WebDriver driver = getDriverInstance();
-
         AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
         adminLoginPage.goToAdminLogin();
 
         adminLoginPage.loginWithProvidedCredentials(login, password);
-        // TODO: asserttrue or false error text msg, DONE
+
         assertTrue(adminLoginPage.isLoginErrorPresent(login, password));
-        driver.close();
     }
 
     @Test
     public void testingNavigationOnAdminPanel() throws InterruptedException {
-        WebDriver driver = getDriverInstance();
-
         AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
         adminLoginPage.goToAdminLogin();
 
@@ -45,7 +40,6 @@ public class AdminLoginPageTest extends BaseTest {
         adminLibrary.clickAdminLibraryFolder("Для семейных");
         Thread.sleep(1000);
         adminLibrary.clickAdminLibraryFolder("2004 Семейное Кавказ");
-        driver.close();
     }
 
 

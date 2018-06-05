@@ -7,19 +7,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class JSWaiter {
 
-    private static WebDriver jsWaitDriver;
-    private static WebDriverWait jsWait;
-    private static JavascriptExecutor jsExec;
+    private WebDriver jsWaitDriver;
+    private WebDriverWait jsWait;
+    private JavascriptExecutor jsExec;
 
-    //Get the driver
-    public static void setDriver (WebDriver driver) {
-        jsWaitDriver = driver;
+    public JSWaiter(WebDriver driver){
+        this.jsWaitDriver = driver;
         jsWait = new WebDriverWait(jsWaitDriver, 10);
         jsExec = (JavascriptExecutor) jsWaitDriver;
     }
 
     //Wait for JQuery Load
-    public static void waitForJQueryLoad() {
+    public void waitForJQueryLoad() {
         //Wait for jQuery to load
         ExpectedCondition<Boolean> jQueryLoad = driver -> ((Long) ((JavascriptExecutor) jsWaitDriver)
                 .executeScript("return jQuery.active") == 0);
@@ -39,7 +38,7 @@ public class JSWaiter {
 
 
     //Wait for Angular Load
-    public static void waitForAngularLoad() {
+    public void waitForAngularLoad() {
         WebDriverWait wait = new WebDriverWait(jsWaitDriver,15);
         JavascriptExecutor jsExec = (JavascriptExecutor) jsWaitDriver;
 
@@ -63,7 +62,7 @@ public class JSWaiter {
     }
 
     //Wait Until JS Ready
-    public static void waitUntilJSReady() {
+    public void waitUntilJSReady() {
         WebDriverWait wait = new WebDriverWait(jsWaitDriver,15);
         JavascriptExecutor jsExec = (JavascriptExecutor) jsWaitDriver;
 
@@ -85,7 +84,7 @@ public class JSWaiter {
     }
 
     //Wait Until JQuery and JS Ready
-    public static void waitUntilJQueryReady() {
+    public void waitUntilJQueryReady() {
         JavascriptExecutor jsExec = (JavascriptExecutor) jsWaitDriver;
 
         //First check that JQuery is defined on the page. If it is, then wait AJAX
@@ -108,7 +107,7 @@ public class JSWaiter {
     }
 
     //Wait Until Angular and JS Ready
-    public static void waitUntilAngularReady() {
+    public void waitUntilAngularReady() {
         JavascriptExecutor jsExec = (JavascriptExecutor) jsWaitDriver;
 
         //First check that ANGULAR is defined on the page. If it is, then wait ANGULAR
@@ -136,12 +135,12 @@ public class JSWaiter {
     }
 
     //Wait Until JQuery Angular and JS is ready
-    public static void waitJQueryAngular() {
+    public void waitJQueryAngular() {
         waitUntilJQueryReady();
         waitUntilAngularReady();
     }
 
-    public static void sleep (Integer seconds) {
+    public void sleep (Integer seconds) {
         long secondsLong = (long) seconds;
         try {
             Thread.sleep(secondsLong);

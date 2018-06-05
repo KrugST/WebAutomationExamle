@@ -20,6 +20,9 @@ public class Playlist {
     }
 
     public List<String> getPlaylistItems() {
+        JSWaiter jsWaiter = new JSWaiter(driver);
+        jsWaiter.waitForJQueryLoad();
+
         List<WebElement> playListItemsWebElement = driver.findElements(playlistItemLocator);
         List<String> playListItemsText = new ArrayList<String>();
         for (WebElement playListItem : playListItemsWebElement) {
@@ -29,6 +32,9 @@ public class Playlist {
     }
 
     public boolean isPlaylistEmpty() {
+        JSWaiter jsWaiter = new JSWaiter(driver);
+        jsWaiter.waitForJQueryLoad();
+
         // ну фиг знает, если метод getPlaylistItems невыполнитсо то всё итак сломаетсо
         List<String> playListItems = getPlaylistItems();
         if (playListItems.size() == 0) {
@@ -40,13 +46,21 @@ public class Playlist {
     }
 
     public void waitToLoadPlaylist() {
+        JSWaiter jsWaiter = new JSWaiter(driver);
+        jsWaiter.waitForJQueryLoad();
 
     }
     public boolean isResetButtonPresent() {
+        JSWaiter jsWaiter = new JSWaiter(driver);
+        jsWaiter.waitForJQueryLoad();
+
         return DriverUtility.isElementPresent(driver, resetButtonLocator);
     }
 
     public void clickResetButton() {
+        JSWaiter jsWaiter = new JSWaiter(driver);
+        jsWaiter.waitForJQueryLoad();
+
         driver.findElement(resetButtonLocator).click();
     }
 

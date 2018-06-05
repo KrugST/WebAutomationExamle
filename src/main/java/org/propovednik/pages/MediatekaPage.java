@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.propovednik.base.DriverUtility;
+import org.propovednik.base.JSWaiter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 public class MediatekaPage {
 
     WebDriver driver;
-    WebDriverWait wait = new WebDriverWait(driver, 10);
+    //WebDriverWait wait = new WebDriverWait(driver, 10);
     private By downloadIconLocator = By.xpath(".//img[@src='/modules/common/images/download.png']");
     private By breadcrumbs = By.xpath("//div[@class='breadcrumb-wrapper']//div[contains(@class, 'breadcrumb ')]");
 
@@ -21,36 +22,41 @@ public class MediatekaPage {
         this.driver = driver;
     }
 
-    public void waitOnMediatekaPageToLoad() {
-        // TODO: maybe i can put waiter here to wait if whole page is loaded whole folder list, DONE? or i need something better?
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@id='track-list']//img)[last()]"))); //Надо поменять на чтото получше
-    }
-    // метод который проверяет и находит название папки на сайте и проверяет если он там точно есть, в него передаётсо название папки и возврашяетсо true or false
     public boolean isFolderPresent(String folderItem) {
-        waitOnMediatekaPageToLoad();
+        JSWaiter jsWaiter = new JSWaiter(driver);
+        jsWaiter.waitForJQueryLoad();
+
         return DriverUtility.isElementPresent(driver, By.linkText(folderItem));
     }
 
     //метод чтобы провериить если у фолдера есть кнопочка скачать, в него передаётсо название папки и возвращяетсо true or false
     public boolean isDownloadIconPresentForFolder(String folderName) {
-        waitOnMediatekaPageToLoad();
+        JSWaiter jsWaiter = new JSWaiter(driver);
+        jsWaiter.waitForJQueryLoad();
+
         return DriverUtility.isElementPresentWithinAnotherElement(driver, getFolderElement(folderName), downloadIconLocator);
     }
 
     //Метод для нажатия папки на странице мидиотека, в него передаю название папки которую нужно нажать, и это название вставляю прямо в xpath
     public void clickFolder(String folderName) {
-        waitOnMediatekaPageToLoad();
+        JSWaiter jsWaiter = new JSWaiter(driver);
+        jsWaiter.waitForJQueryLoad();
+
         getFolderElement(folderName).click();
     }
 
     private WebElement getFolderElement(String folderName) {
-        waitOnMediatekaPageToLoad();
+        JSWaiter jsWaiter = new JSWaiter(driver);
+        jsWaiter.waitForJQueryLoad();
+
         WebElement folderElement = driver.findElement(By.xpath("//div[@title='" + folderName + "']/parent::*"));
         return folderElement;
     }
 
     public List<String> getBreadcrumbs() {
-        waitOnMediatekaPageToLoad();
+        JSWaiter jsWaiter = new JSWaiter(driver);
+        jsWaiter.waitForJQueryLoad();
+
         WebElement breadcrumbsDiv = driver.findElement(breadcrumbs);
         List<WebElement> breadcrumbsItemsList = breadcrumbsDiv.findElements(By.tagName("a"));
         List<String> actualBreadcrumbsList = new ArrayList<String>();
@@ -64,7 +70,9 @@ public class MediatekaPage {
     }
 
     public void addAudioAlbumToPlayList(String audioListAlbumText) {
-        waitOnMediatekaPageToLoad();
+        JSWaiter jsWaiter = new JSWaiter(driver);
+        jsWaiter.waitForJQueryLoad();
+
         WebElement audioListAlbumItem = driver.findElement(By.xpath("//div[@title='" + audioListAlbumText + "']/parent::*"));
         // TODO:  conflict with xpath, not looking inside element, it looks inside whole page
         audioListAlbumItem.findElement(By.xpath("//img[@title='Add to Playlist']")).click();
