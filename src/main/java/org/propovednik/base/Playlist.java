@@ -3,6 +3,7 @@ package org.propovednik.base;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,9 @@ public class Playlist {
         }
     }
 
+    public void waitToLoadPlaylist() {
+
+    }
     public boolean isResetButtonPresent() {
         return DriverUtility.isElementPresent(driver, resetButtonLocator);
     }
@@ -45,4 +49,6 @@ public class Playlist {
     public void clickResetButton() {
         driver.findElement(resetButtonLocator).click();
     }
+
+
 }

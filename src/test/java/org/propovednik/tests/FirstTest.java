@@ -183,13 +183,13 @@ public class FirstTest extends BaseTest {
         Menu menu = new Menu(driver);
         menu.clickMenuItem("Медиатека");
 
-        Thread.sleep(1000); // TODO: i need to write waiters
+        //Thread.sleep(1000); // TODO: i need to write waiters
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
         mediatekaPage.clickFolder("Благовестие");
 
-        Thread.sleep(3000);
+       // Thread.sleep(3000);
         mediatekaPage.addAudioAlbumToPlayList("2002 Курганинск");
-        Thread.sleep(3000); //TODO: ahhh nope i need better waiter =(
+       // Thread.sleep(3000); //TODO: ahhh nope i need better waiter =(
         Playlist playlist = new Playlist(driver);
         List<String> playListItemsTextActual = playlist.getPlaylistItems();
         //TODO: create veriable with expected playlist items, and compare it to actual, assert true equal, DONE
