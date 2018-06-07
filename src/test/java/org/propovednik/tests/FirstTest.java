@@ -193,7 +193,7 @@ public class FirstTest extends BaseTest {
 
       //  jsWaiter.waitForJQueryLoad();
 
-        mediatekaPage.addAudioAlbumToPlayList("2002 Курганинск");
+        mediatekaPage.addAudioAlbumToPlayList("1997 Дневник миссионера (В. Фот) Байкит-Ванавары");
         Playlist playlist = new Playlist(driver);
 
      //   jsWaiter.waitForJQueryLoad();

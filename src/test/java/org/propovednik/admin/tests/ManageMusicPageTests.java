@@ -6,6 +6,7 @@ import org.propovednik.admin.AdminLoginPage;
 import org.propovednik.admin.AdminMenu;
 import org.propovednik.base.BaseTest;
 import org.propovednik.base.JSWaiter;
+import org.propovednik.base.Menu;
 import org.propovednik.pages.HomePage;
 import org.propovednik.pages.MediatekaPage;
 import org.testng.annotations.Test;
@@ -46,17 +47,23 @@ public class ManageMusicPageTests extends BaseTest {
         //Make folder public
         adminLoginPage.goToAdminLogin();
         adminMenu.clickAdminMenuItem("Library");
-
+        adminLibrary.makeFolderPublic(newFolderName);
 
         // Verify breadcrumbs says Медиатека » YourFolderName
         List<String> expectedBreadcrumList = Arrays.asList("Медиатека", ""+newFolderName+"");
         HomePage homePage = new HomePage(driver);
-        homePage.goToHomePage();
+        homePage.goToDevHomePage();
+
+        Menu menu = new Menu(driver);
+        menu.clickMenuItem("Медиатека");
 
         MediatekaPage mediatekaPage = new MediatekaPage(driver);
         mediatekaPage.clickFolder(newFolderName);
 
         List<String> actualBreadcrumbsList = mediatekaPage.getBreadcrumbs();
+        System.out.println(actualBreadcrumbsList);
+        System.out.println(expectedBreadcrumList);
+        // TODO: first letter is always capital so it will fail, i need to figure that out
         assertTrue(actualBreadcrumbsList.equals(expectedBreadcrumList));
 
         // Add multiple (lets to 3 files) mp3 files to upload queue
@@ -77,6 +84,9 @@ public class ManageMusicPageTests extends BaseTest {
         // Verify file is deleted
         // Edit file name for one of the files
         // Verify file name is edited
+
+        //Delete folder
+
     }
 
     @Test

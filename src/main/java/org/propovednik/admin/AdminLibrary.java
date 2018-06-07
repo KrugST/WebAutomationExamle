@@ -26,9 +26,10 @@ public class AdminLibrary {
         driver.findElement(By.xpath("//div[@id='newFolderForm']/div[@class='editBtns']/button[@class='editBtn']")).click();
     }
 
-    public void makeFolderPublic() {
+    public void makeFolderPublic(String newFolderNameToSearch) {
         JSWaiter jsWaiter = new JSWaiter(driver);
         jsWaiter.waitForJQueryLoad();
+        driver.findElement(By.xpath("//a[contains(text(), '"+newFolderNameToSearch+"')]/../../following-sibling::div/a[4]")).click();
 
     }
 

@@ -73,9 +73,9 @@ public class MediatekaPage {
         JSWaiter jsWaiter = new JSWaiter(driver);
         jsWaiter.waitForJQueryLoad();
 
-        WebElement audioListAlbumItem = driver.findElement(By.xpath("//div[@title='" + audioListAlbumText + "']/parent::*"));
+       // WebElement audioListAlbumItem = driver.findElement(By.xpath("//div[@title='" + audioListAlbumText + "']/parent::*"));
         // TODO:  conflict with xpath, not looking inside element, it looks inside whole page
-        audioListAlbumItem.findElement(By.xpath("//img[@title='Add to Playlist']")).click();
+        driver.findElement(By.xpath("//a[contains(text(), '" + audioListAlbumText + "')]/parent::div/following-sibling::div/a[2]")).click();
 
     }
 

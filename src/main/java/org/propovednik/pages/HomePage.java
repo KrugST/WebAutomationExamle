@@ -14,4 +14,8 @@ public class HomePage {
     public void goToHomePage() {
         driver.get("https://propovednik.com/");
     }
+
+    public void goToDevHomePage() {
+        driver.get("http://dev.propovednik.com/");
+    }
 }
