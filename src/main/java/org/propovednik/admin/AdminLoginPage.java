@@ -22,7 +22,6 @@ public class AdminLoginPage {
     }
 
     public void loginWithAdminAccount() {
-        // TODO: refactor locators and similar lines, DONE
         goToAdminLogin();
         driver.findElement(usernameFieldLocator).sendKeys(login);
         driver.findElement(passwordFieldLocator).sendKeys(password);
@@ -31,7 +30,6 @@ public class AdminLoginPage {
     }
 
     public void loginWithProvidedCredentials(String loginToInput, String passwordToInput) {
-        // TODO: refactor locators and similar lines, DONE
         goToAdminLogin();
         driver.findElement(usernameFieldLocator).sendKeys(loginToInput);
         driver.findElement(passwordFieldLocator).sendKeys(passwordToInput);

@@ -5,30 +5,60 @@ import org.propovednik.admin.AdminLibrary;
 import org.propovednik.admin.AdminLoginPage;
 import org.propovednik.admin.AdminMenu;
 import org.propovednik.base.BaseTest;
+import org.propovednik.base.JSWaiter;
+import org.propovednik.pages.HomePage;
+import org.propovednik.pages.MediatekaPage;
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
+import static org.testng.Assert.assertTrue;
+
 
 public class ManageMusicPageTests extends BaseTest {
 
+    String newFolderName = UUID.randomUUID().toString(); // maybe i should make that rendom?
+
     @Test
     public void testWorkingWithFiles() throws InterruptedException {
-        WebDriver driver = getDriverInstance();
+        JSWaiter jsWaiter = new JSWaiter(driver);
 
         // Navigate to http://dev.propovednik.com/admin
         AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
         adminLoginPage.goToAdminLogin();
 
         // Login
+        jsWaiter.waitForJQueryLoad();
         adminLoginPage.loginWithAdminAccount();
 
         // Navigate to Manage Music Tracks page
+        jsWaiter.waitForJQueryLoad();
         AdminMenu adminMenu = new AdminMenu(driver);
         adminMenu.clickAdminMenuItem("Library");
 
-        AdminLibrary adminLibrary = new AdminLibrary(driver);
-        adminLibrary.createNewFolder("test folder1");
-
         // Create new folder
+        jsWaiter.waitForJQueryLoad();
+        AdminLibrary adminLibrary = new AdminLibrary(driver);
+        adminLibrary.createNewFolder(newFolderName);
+
+        //Make folder public
+        adminLoginPage.goToAdminLogin();
+        adminMenu.clickAdminMenuItem("Library");
+
+
         // Verify breadcrumbs says Медиатека » YourFolderName
+        List<String> expectedBreadcrumList = Arrays.asList("Медиатека", ""+newFolderName+"");
+        HomePage homePage = new HomePage(driver);
+        homePage.goToHomePage();
+
+        MediatekaPage mediatekaPage = new MediatekaPage(driver);
+        mediatekaPage.clickFolder(newFolderName);
+
+        List<String> actualBreadcrumbsList = mediatekaPage.getBreadcrumbs();
+        assertTrue(actualBreadcrumbsList.equals(expectedBreadcrumList));
+
         // Add multiple (lets to 3 files) mp3 files to upload queue
         // Verify files added and they have proper size and title shown
         // Verify queue length shows proper number
