@@ -56,6 +56,7 @@ public class MediatekaPage {
     public List<String> getBreadcrumbs() {
         JSWaiter jsWaiter = new JSWaiter(driver);
         jsWaiter.waitForJQueryLoad();
+        jsWaiter.sleep(2); //TODO: something is not working sometimes
 
         WebElement breadcrumbsDiv = driver.findElement(breadcrumbs);
         List<WebElement> breadcrumbsItemsList = breadcrumbsDiv.findElements(By.tagName("a"));

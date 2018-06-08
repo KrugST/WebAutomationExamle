@@ -38,7 +38,7 @@ public class BaseTest {
     @AfterTest
     public void afterTest(){
         if (driver != null) {
-            driver.quit();
+          //  driver.quit();
         }
     }
 

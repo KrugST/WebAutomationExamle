@@ -1,5 +1,6 @@
 package org.propovednik.admin.tests;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.propovednik.admin.AdminLibrary;
 import org.propovednik.admin.AdminLoginPage;
@@ -20,7 +21,7 @@ import static org.testng.Assert.assertTrue;
 
 public class ManageMusicPageTests extends BaseTest {
 
-    String newFolderName = UUID.randomUUID().toString(); // maybe i should make that rendom?
+    String newFolderName = "TestFolder-"+UUID.randomUUID().toString(); // maybe i should make that rendom?
 
     @Test
     public void testWorkingWithFiles() throws InterruptedException {
@@ -63,10 +64,14 @@ public class ManageMusicPageTests extends BaseTest {
         List<String> actualBreadcrumbsList = mediatekaPage.getBreadcrumbs();
         System.out.println(actualBreadcrumbsList);
         System.out.println(expectedBreadcrumList);
-        // TODO: first letter is always capital so it will fail, i need to figure that out
+
         assertTrue(actualBreadcrumbsList.equals(expectedBreadcrumList));
 
         // Add multiple (lets to 3 files) mp3 files to upload queue
+        adminLoginPage.goToAdminLogin();
+        adminMenu.clickAdminMenuItem("Library");
+        adminLibrary.clickAdminLibraryFolder(newFolderName);
+
         // Verify files added and they have proper size and title shown
         // Verify queue length shows proper number
         // Verify Upload All, Cancel All, Remove All buttons are present
@@ -118,4 +123,28 @@ public class ManageMusicPageTests extends BaseTest {
 
     }
 
+    @Test
+    public void name() {
+        JSWaiter jsWaiter = new JSWaiter(driver);
+
+        // Navigate to http://dev.propovednik.com/admin
+        AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
+        adminLoginPage.goToAdminLogin();
+
+        // Login
+        jsWaiter.waitForJQueryLoad();
+        adminLoginPage.loginWithAdminAccount();
+
+        // Navigate to Manage Music Tracks page
+        jsWaiter.waitForJQueryLoad();
+        AdminMenu adminMenu = new AdminMenu(driver);
+        adminMenu.clickAdminMenuItem("Library");
+
+        // Create new folder
+        jsWaiter.waitForJQueryLoad();
+        AdminLibrary adminLibrary = new AdminLibrary(driver);
+        adminLibrary.clickAdminLibraryFolder("2017 Christmas story");
+        jsWaiter.waitForJQueryLoad();
+        adminLibrary.uploadFile();
+    }
 }

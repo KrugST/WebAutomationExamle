@@ -2,10 +2,13 @@ package org.propovednik.admin;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.propovednik.base.JSWaiter;
 
 public class AdminLibrary {
     WebDriver driver;
+
+
     public AdminLibrary (WebDriver driver) {
         this.driver = driver;
     }
@@ -31,6 +34,11 @@ public class AdminLibrary {
         jsWaiter.waitForJQueryLoad();
         driver.findElement(By.xpath("//a[contains(text(), '"+newFolderNameToSearch+"')]/../../following-sibling::div/a[4]")).click();
 
+    }
+
+    public void uploadFile() {
+        WebElement uploadFileDropArea = driver.findElement(By.xpath("//div[@uploader='uploader' and @class='well my-drop-zone']"));
+        uploadFileDropArea.sendKeys("C:/Users/roman.sentsov/Desktop/test111.txt");
     }
 
 }
