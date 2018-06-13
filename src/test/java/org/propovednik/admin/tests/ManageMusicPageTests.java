@@ -21,10 +21,11 @@ import static org.testng.Assert.assertTrue;
 
 public class ManageMusicPageTests extends BaseTest {
 
-    String newFolderName = "TestFolder-"+UUID.randomUUID().toString(); // maybe i should make that rendom?
+
 
     @Test
     public void testWorkingWithFiles() throws InterruptedException {
+        String newFolderName = "TestFolder-"+UUID.randomUUID().toString(); // maybe i should make that rendom?
         JSWaiter jsWaiter = new JSWaiter(driver);
 
         // Navigate to http://dev.propovednik.com/admin
@@ -71,7 +72,7 @@ public class ManageMusicPageTests extends BaseTest {
         adminLoginPage.goToAdminLogin();
         adminMenu.clickAdminMenuItem("Library");
         adminLibrary.clickAdminLibraryFolder(newFolderName);
-
+        adminLibrary.uploadFile();
         // Verify files added and they have proper size and title shown
         // Verify queue length shows proper number
         // Verify Upload All, Cancel All, Remove All buttons are present
@@ -95,8 +96,9 @@ public class ManageMusicPageTests extends BaseTest {
     }
 
     @Test
-    public void updateTags(){
-        WebDriver driver = getDriverInstance();
+    public void updateTags() throws InterruptedException {
+        String newFolderName = "TestFolder-"+UUID.randomUUID().toString(); // maybe i should make that rendom?
+        JSWaiter jsWaiter = new JSWaiter(driver);
 
         // Navigate to http://dev.propovednik.com/admin
         AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
@@ -106,8 +108,32 @@ public class ManageMusicPageTests extends BaseTest {
         adminLoginPage.loginWithAdminAccount();
 
         // Navigate to Manage Music Tracks page
+        jsWaiter.waitForJQueryLoad();
+        AdminMenu adminMenu = new AdminMenu(driver);
+        adminMenu.clickAdminMenuItem("Library");
+
         // Create new folder
+        jsWaiter.waitForJQueryLoad();
+        AdminLibrary adminLibrary = new AdminLibrary(driver);
+        adminLibrary.createNewFolder(newFolderName);
+
         // Verify breadcrumbs says Медиатека » YourFolderName
+        List<String> expectedBreadcrumList = Arrays.asList("Медиатека", ""+newFolderName+"");
+        HomePage homePage = new HomePage(driver);
+        homePage.goToDevHomePage();
+
+        Menu menu = new Menu(driver);
+        menu.clickMenuItem("Медиатека");
+
+        MediatekaPage mediatekaPage = new MediatekaPage(driver);
+        mediatekaPage.clickFolder(newFolderName);
+
+        List<String> actualBreadcrumbsList = mediatekaPage.getBreadcrumbs();
+        System.out.println(actualBreadcrumbsList);
+        System.out.println(expectedBreadcrumList);
+
+        assertTrue(actualBreadcrumbsList.equals(expectedBreadcrumList));
+
         // Upload multiple files and refresh the folder
         // Verify files got uploaded
         // For first file, update title, artist and album

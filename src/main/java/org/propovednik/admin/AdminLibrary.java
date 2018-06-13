@@ -3,6 +3,7 @@ package org.propovednik.admin;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.propovednik.base.DragAndDropFile;
 import org.propovednik.base.JSWaiter;
 
 public class AdminLibrary {
@@ -37,8 +38,12 @@ public class AdminLibrary {
     }
 
     public void uploadFile() {
-        WebElement uploadFileDropArea = driver.findElement(By.xpath("//div[@uploader='uploader' and @class='well my-drop-zone']"));
-        uploadFileDropArea.sendKeys("C:/Users/roman.sentsov/Desktop/test111.txt");
+        JSWaiter jsWaiter = new JSWaiter(driver);
+        jsWaiter.waitForJQueryLoad();
+        //WebElement uploadFileDropArea = driver.findElement(By.xpath("//div[@uploader='uploader' and @class='well my-drop-zone']"));
+        WebElement uploadFileDropArea = driver.findElement(By.xpath("//*[@id='uploadForm']/div/div[2]"));
+        DragAndDropFile dragAndDropFile = new DragAndDropFile(driver);
+        dragAndDropFile.dropFile(new String[]{"C:/Users/roman.sentsov/Desktop/test111.txt"},uploadFileDropArea);
     }
 
 }
