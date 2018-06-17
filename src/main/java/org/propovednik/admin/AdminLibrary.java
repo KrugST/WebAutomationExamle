@@ -40,6 +40,7 @@ public class AdminLibrary {
     public void uploadFile() {
         JSWaiter jsWaiter = new JSWaiter(driver);
         jsWaiter.waitForJQueryLoad();
+
         //WebElement uploadFileDropArea = driver.findElement(By.xpath("//div[@uploader='uploader' and @class='well my-drop-zone']"));
         WebElement uploadFileDropArea = driver.findElement(By.xpath("//*[@id='uploadForm']/div/div[2]"));
         DragAndDropFile dragAndDropFile = new DragAndDropFile(driver);

@@ -73,6 +73,7 @@ public class ManageMusicPageTests extends BaseTest {
         adminMenu.clickAdminMenuItem("Library");
         adminLibrary.clickAdminLibraryFolder(newFolderName);
         adminLibrary.uploadFile();
+
         // Verify files added and they have proper size and title shown
         // Verify queue length shows proper number
         // Verify Upload All, Cancel All, Remove All buttons are present
