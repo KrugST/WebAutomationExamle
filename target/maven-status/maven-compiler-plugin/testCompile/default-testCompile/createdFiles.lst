@@ -1,0 +1,3 @@
+org\propovednik\tests\FirstTest.class
+org\propovednik\tests\AdminLoginPageTest.class
+org\propovednik\admin\tests\ManageMusicPageTests.class

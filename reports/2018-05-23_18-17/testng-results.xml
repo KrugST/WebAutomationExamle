@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="8" total="9" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Surefire suite" duration-ms="5532" started-at="2018-05-23T18:17:13Z" finished-at="2018-05-23T18:17:19Z">
+    <groups>
+    </groups>
+    <test name="Surefire test" duration-ms="5532" started-at="2018-05-23T18:17:13Z" finished-at="2018-05-23T18:17:19Z">
+      <class name="org.propovednik.tests.FirstTest">
+        <test-method status="PASS" signature="isFolderPresent()[pri:0, instance:org.propovednik.tests.FirstTest@42e22a53]" name="isFolderPresent" duration-ms="5505" started-at="2018-05-23T18:17:13Z" finished-at="2018-05-23T18:17:19Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- isFolderPresent -->
+      </class> <!-- org.propovednik.tests.FirstTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>

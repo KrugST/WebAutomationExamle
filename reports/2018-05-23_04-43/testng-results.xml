@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="TmpSuite" duration-ms="18298" started-at="2018-05-23T04:43:35Z" finished-at="2018-05-23T04:43:53Z">
+    <groups>
+    </groups>
+    <test name="TmpTest" duration-ms="18298" started-at="2018-05-23T04:43:35Z" finished-at="2018-05-23T04:43:53Z">
+      <class name="org.propovednik.tests.AdminLoginPageTest">
+        <test-method status="PASS" signature="testingLoginWithWrongCredentials()[pri:0, instance:org.propovednik.tests.AdminLoginPageTest@1704f67f]" name="testingLoginWithWrongCredentials" duration-ms="4859" started-at="2018-05-23T04:43:35Z" finished-at="2018-05-23T04:43:40Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingLoginWithWrongCredentials -->
+        <test-method status="PASS" signature="testingNavigationOnAdminPanel()[pri:0, instance:org.propovednik.tests.AdminLoginPageTest@1704f67f]" name="testingNavigationOnAdminPanel" duration-ms="13362" started-at="2018-05-23T04:43:40Z" finished-at="2018-05-23T04:43:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testingNavigationOnAdminPanel -->
+      </class> <!-- org.propovednik.tests.AdminLoginPageTest -->
+    </test> <!-- TmpTest -->
+  </suite> <!-- TmpSuite -->
+</testng-results>

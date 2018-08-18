@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" verbose="0" name="Failed suite [Surefire suite]" parallel="methods">
+  <test thread-count="1" verbose="0" name="Surefire test(failed)" parallel="methods">
+    <classes>
+      <class name="org.propovednik.tests.FirstTest">
+        <methods>
+          <include name="checkAudioBibleForDownloadIcon"/>
+          <include name="checkBreadcrumbIfItSaysPageFolder"/>
+          <include name="checkIfBlagovestieDoesNotHaveDownloadIcon"/>
+        </methods>
+      </class> <!-- org.propovednik.tests.FirstTest -->
+    </classes>
+  </test> <!-- Surefire test(failed) -->
+</suite> <!-- Failed suite [Surefire suite] -->
